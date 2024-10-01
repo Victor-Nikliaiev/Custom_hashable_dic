@@ -16,7 +16,7 @@
 Clone the repository or download the `HashableDic` class file and include it in your project:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Victor-Nikliaiev/Custom_hashable_dic.git
 ```
 
 Ensure that your project follows the [MIT License](LICENSE.md) conditions, provided with this project.
