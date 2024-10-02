@@ -1,53 +1,63 @@
-# HashableDic Class
+# Custom Hashable Dictionary (`HashableDic`)
 
-## Overview
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-`HashableDic` is a Python class designed to provide a dictionary that is hashable. This allows the dictionary to be used as a key in another dictionary or as an element in a set, making it useful for situations where the immutability of a dictionary is required, but you still want to allow for modification of its contents in a controlled way.
+## Description
 
-### Features
+This repository contains a custom Python class `HashableDic` that implements a hashable dictionary. This dictionary can be used as a key in other dictionaries, an element in sets, or any other context where hashability is required. It allows for adding, removing, and accessing items while maintaining hashability, even when the dictionary is modified.
 
--   Can add key-value pairs or whole dictionaries.
--   Supports both mutable and immutable behaviors.
--   Provides equality and hashing capabilities to allow usage as a key in dictionaries or elements in sets.
--   Ensures that dictionaries with different structures cannot be added to the existing dictionary.
+## Features
+
+-   **Hashable Dictionary**: The `HashableDic` class ensures that the dictionary is hashable and can be used in hashable contexts like keys in dictionaries or elements in sets.
+-   **Mutable Yet Hashable**: The class tracks changes to the dictionary and recalculates its hash only when necessary, ensuring efficient hash management.
+-   **Dictionary Additions**: You can add individual key-value pairs or another dictionary, with checks to ensure structural compatibility.
+-   **Custom Item Hashing**: The class converts nested dictionaries into hashable objects automatically.
 
 ## Installation
 
-Clone the repository or download the `HashableDic` class file and include it in your project:
+To use the `HashableDic` class, simply clone this repository or copy the class code from `hashable_dic.py` into your Python project.
 
 ```bash
 git clone https://github.com/Victor-Nikliaiev/Custom_hashable_dic.git
 ```
 
-Ensure that your project follows the [MIT License](LICENSE.md) conditions, provided with this project.
+Then, import and use the `HashableDic` class in your Python code:
+
+```python
+from hashable_dic import HashableDic
+
+# Example usage
+my_dict = HashableDic({'a': 1, 'b': 2})
+print(hash(my_dict))  # Outputs the hash of the dictionary
+```
 
 ## Usage
 
-Below is an example of how to use the `HashableDic` class:
+### Example 1: Creating and Adding Items
 
 ```python
-# Example usage of HashableDic
-
-# Create a HashableDic instance
+print("-" * 100)
 fruits = HashableDic({
     "apple": 1,
     "orange": 2,
     "banana": 3
 })
 
-# Add more fruits
+# Adding a new dictionary
 fruits.add({
     "mango": 4,
-    "pineapple": 5
-})
+    "pineapple": 5})
 
-# Add another key-value pair
+# Adding a single key-value pair
 fruits.add("grape", 6)
 
-# Print the updated dictionary
-print(fruits)
+print(fruits)  # Output: {'apple': 1, 'orange': 2, 'banana': 3, 'mango': 4, 'pineapple': 5, 'grape': 6}
+print("-" * 100)
+```
 
-# Working with more complex dictionaries
+### Example 2: Handling Nested Dictionaries and Adding Complex Structures
+
+```python
 users_statuses = HashableDic()
 online_status = {"status": "online"}
 offline_status = {"status": "offline"}
@@ -74,30 +84,23 @@ user2 = {
     }
 }
 
-# Add users with statuses
+# Adding users with their statuses
 users_statuses.add(user1, online_status)
 users_statuses.add(user2, offline_status)
 
-# Update statuses
+# Updating statuses
 users_statuses.add(user1, offline_status)
 users_statuses.add(user2, online_status)
 
-# Print the updated user statuses
 print(users_statuses)
+
+# Attempting to add a dictionary with a different structure
+# Raises ValueError: "Dictionary with different structure cannot be added."
+users_statuses.add({"orange": 5})
 ```
 
-### Methods
-
--   `add(*args)`: Adds key-value pairs or dictionaries to the `HashableDic`.
--   `remove(key)`: Removes a key-value pair from the dictionary.
--   `get(key)`: Retrieves a value by its key.
--   `__getitem__(key)`: Retrieves a value by key using the `[]` operator.
--   `__setitem__(key, value)`: Sets a value for a given key using the `[]` operator.
--   `__contains__(key)`: Checks if a key exists in the dictionary.
--   `__iter__()`: Allows iteration over the dictionary's items.
--   `__eq__(other)`: Compares two `HashableDic` objects for equality.
--   `__hash__()`: Returns the hash value of the dictionary.
+In the second example, `HashableDic` can handle complex nested dictionaries and ensure that only structurally compatible dictionaries are added.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
