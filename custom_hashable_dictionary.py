@@ -80,6 +80,16 @@ class HashableDic:
     def _make_hashable(self, item):
         if isinstance(item, dict):
             return HashableDic({self._make_hashable(k): self._make_hashable(v) for k, v in item.items()})
+        
+        if isinstance(item, list):
+            return tuple(self._make_hashable(i) for i in item)
+        
+        if isinstance(item, tuple):
+            return tuple(self._make_hashable(i) for i in item)
+        
+        if isinstance(item, set):
+            return frozenset(self._make_hashable(i) for i in item)
+        
         return item
     
 

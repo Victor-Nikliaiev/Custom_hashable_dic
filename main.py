@@ -1,6 +1,6 @@
 from custom_hashable_dictionary import HashableDic
 
-##################################################
+#################################################
 print("-"*100)
 fruits = HashableDic({
     "apple": 1,
@@ -39,7 +39,7 @@ user2 = {
     "location": {
         "city": "Los Angeles",
         "state": "CA",
-        "country": "USA"
+        "country": "USA",
     }
 }
 
@@ -48,11 +48,18 @@ users_statuses.add(user2, offline_status)
 
 users_statuses.add(user1, offline_status)
 users_statuses.add(user2, online_status)
-users_statuses.add({"orange": 5})  # Raises ValueError: "Dictionary with different structure cannot be added."
+# users_statuses.add({"orange": 5})  # Raises ValueError: "Dictionary with different structure cannot be added."
 print(users_statuses)
 
 
+arr_status = HashableDic()
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+arr_status.add(arr, "sequence")
 
+arr_status.get(arr)
+
+print(arr_status)
+print(arr_status.get(arr))
 
  
 
